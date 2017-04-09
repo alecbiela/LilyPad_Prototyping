@@ -1,39 +1,96 @@
+//enumeration for different activites - only 1 can be active at a time
+enum Prototypes
+{
+  MUSIC,
+  MEMORY,
+  SIMONSAYS,
+  LANDSCAPE
+};
 
-Pad[] pads = new Pad[5];
+//attributes
+Prototypes currentPrototype;
 float lastTime = 0;
 float deltaTime = 0;
 
+Music musicActivity;
+Memory memoryActivity;
+SimonSays simonActivity;
+Landscape landscapeActivity;
+
+//called once for initialization
 void setup()
 {
   size(800,600,P2D);
   background(150);
   
-  pads[0] = new Pad(new PVector(200,150), 100,1);
-  pads[1] = new Pad(new PVector(600,150), 100,2);
-  pads[2] = new Pad(new PVector(400,300), 100,3);
-  pads[3] = new Pad(new PVector(200,450), 100,4);
-  pads[4] = new Pad(new PVector(600,450), 100,5);
+  //set first prototype to music (for now)
+  currentPrototype = Prototypes.MUSIC;
+
+  //instantiate activities
+  musicActivity = new Music();
+  memoryActivity = new Memory();
+  simonActivity = new SimonSays();
+  landscapeActivity = new Landscape();
 }
 
+//called once per frame
 void draw()
 {
   calculateDeltaTime();
-  update();
   
-  for(Pad p : pads)
+  //decide what to do based on the current activity
+  switch(currentPrototype)
   {
-     p.update(deltaTime);
-     p.display();
+    case MUSIC:  //Music Activity
+      musicActivity.update(deltaTime);
+      break;
+
+    case MEMORY:  //Memory Activity
+      memoryActivity.update(deltaTime);
+      break;
+
+    case SIMONSAYS:  //Simon Says Activity
+      simonActivity.update(deltaTime);
+      break;
+
+    case LANDSCAPE:  //Landscape Activity
+      landscapeActivity.update(deltaTime);
+      break;
   }
 }
 
-void update()
-{
-  
-}
-
+//calculates deltaTime at the beginning of every frame
 void calculateDeltaTime()
 {
   deltaTime = millis() - lastTime;
   lastTime = millis();
 }
+
+
+//handles switching of activities
+void keyReleased()
+{
+  switch(key)
+  {
+    case 'u':  //music activity
+    case 'U':
+      currentPrototype = Prototypes.MUSIC;
+      break;
+    case 'i':  //memory activity
+    case 'I':
+      currentPrototype = Prototypes.MEMORY;
+      break;
+    case 'o':  //simon says activity
+    case 'O':
+      currentPrototype = Prototypes.SIMONSAYS;
+      break;
+    case 'p':  //landscape activity
+    case 'P':
+      currentPrototype = Prototypes.LANDSCAPE;
+      break;
+  }
+  
+  println("Switched Activity to: " + currentPrototype);
+}
+
+//vusually display pad press

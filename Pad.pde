@@ -1,59 +1,57 @@
+//Represents an individual LilyPad in the kit
 class Pad
 {
+  //attributes
   PVector position;
   boolean pressed;
   float widthAndHeight;
-  float startingTime;
-  float pressDuration;
   color padColor;
   int padNumber;
   
-  LED[] leds = new LED[8];
-  
+  //constructor takes position, size (pixels), and what "number" pad it is
   public Pad(PVector pos, float wah, int num)
   {
-    LEDColor startingColor = new LEDColor(255,0,0,1);
     position = pos;
     pressed = false;
     widthAndHeight = wah;
     padNumber = num;
-    pressDuration = 0;
     padColor = color(200,200,200);
-   
-    for(int i=0; i<8; i++)
-    {
-      leds[i] = new LED(startingColor, position.x + (float)(70 * Math.cos(i * Math.PI / 4)), position.y + (float)(70 * Math.sin(i * Math.PI / 4)));
-    }
   }
   
+  //sets the color of the pad, takes rgb as arguments
   public void setColor(int r, int g, int b)
   {
     padColor = color(r,g,b);
   }
   
+  //returns the state of the pressed flag
   public boolean isPressed()
   {
     return pressed;
   }
   
+  //plays a sound, takes the name of the sound (ex. "ping1.mp3")
   public void playSound(String soundName)
   {
     println("Played sound " + soundName + " from this pad");
   }
   
+  //"vibrates" the pad using the motor controllers (dummy for now)
+  public void vibrate(float duration)
+  {
+    println("Pad " + padNumber + " is vibrating!");
+  }
+  
+  //displays the pad on the screen
   public void display()
   {
     fill(padColor);
     ellipseMode(CENTER);
-    ellipse(position.x, position.y, widthAndHeight, widthAndHeight);
-    
+    ellipse(position.x, position.y, widthAndHeight, widthAndHeight);    
   }
   
-  public void update(float deltaTime)
-  {
-    if(pressed) pressDuration += deltaTime;
-  }
-  
+  //the pad internally handles mouse pressing, and will set its own "pressed" flag accordingly
+  //you can get this state by calling isPressed() from your activity class
   void mousePressed()
   {
     if((mouseX > position.x - widthAndHeight/2) && (mouseX < position.x + widthAndHeight/2))
@@ -64,10 +62,4 @@ class Pad
       }
     }
   }
-  
-  public void releasePressed()
-  {
-    pressed = false;
-  }
-  
 }
