@@ -93,4 +93,28 @@ void keyReleased()
   println("Switched Activity to: " + currentPrototype);
 }
 
+//mouse CLICKED callback (on mouse UP)
+void mouseClicked()
+{
+  //decide what to do based on the current activity
+  switch(currentPrototype)
+  {
+    case MUSIC:  //Music Activity
+      if(!musicActivity.soundPlaying) musicActivity.currentPad.mousePress();
+      break;
+
+    case MEMORY:  //Memory Activity
+      //
+      break;
+
+    case SIMONSAYS:  //Simon Says Activity
+      //
+      break;
+
+    case LANDSCAPE:  //Landscape Activity
+      //landscapeActivity.currentPad.mousePress();
+      break;
+  }  
+}
+
 //vusually display pad press
