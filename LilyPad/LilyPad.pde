@@ -108,7 +108,35 @@ void mouseClicked()
       break;
 
     case SIMONSAYS:  //Simon Says Activity
-      //
+      //checks to see what round they are on to see what pads need to be checked
+      switch(simonActivity.currentRound)
+      {
+        case 1:
+          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
+          break;
+        case 2:
+          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
+          break;
+        case 3:
+          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(2)].mousePress();
+          break;
+        case 4:
+          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(2)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(3)].mousePress();
+          break;
+        case 5:
+          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(2)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(3)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(4)].mousePress();
+          break;
+      }
       break;
 
     case LANDSCAPE:  //Landscape Activity
