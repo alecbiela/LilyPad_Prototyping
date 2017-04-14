@@ -10,6 +10,7 @@ class Pad
   color padColor;
   int padNumber;
   SoundFile currentSound;
+  boolean imageFading;
   
   //constructor takes position, size (pixels), and what "number" pad it is
   public Pad(PVector pos, float wah, int num)
@@ -19,6 +20,7 @@ class Pad
     widthAndHeight = wah;
     padNumber = num;
     padColor = color(200,200,200);
+    imageFading=false;
   }
   
   //sets the color of the pad, takes rgb as arguments

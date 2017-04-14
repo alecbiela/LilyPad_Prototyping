@@ -88,6 +88,7 @@ void keyReleased()
     case 'P':
       currentPrototype = Prototypes.LANDSCAPE;
       break;
+      
   }
   
   println("Switched Activity to: " + currentPrototype);
@@ -113,8 +114,36 @@ void mouseClicked()
 
     case LANDSCAPE:  //Landscape Activity
       //landscapeActivity.currentPad.mousePress();
+            for(int i =0; i < landscapeActivity.pads.length;i++)
+      {
+        landscapeActivity.pads[i].mousePress();
+      }
       break;
   }  
+}
+
+void mousePressed()
+{
+    switch(currentPrototype)
+  {
+    case MUSIC:  //Music Activity
+      //if(!musicActivity.soundPlaying) musicActivity.currentPad.mousePress();
+      break;
+
+    case MEMORY:  //Memory Activity
+      //
+      break;
+
+    case SIMONSAYS:  //Simon Says Activity
+      //
+      break;
+
+    case LANDSCAPE:  //Landscape Activity
+      break;
+  }  
+  
+  
+  
 }
 
 //vusually display pad press
