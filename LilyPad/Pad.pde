@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 //Represents an individual LilyPad in the kit
 class Pad
 {
@@ -7,6 +9,7 @@ class Pad
   float widthAndHeight;
   color padColor;
   int padNumber;
+  SoundFile currentSound;
   
   //constructor takes position, size (pixels), and what "number" pad it is
   public Pad(PVector pos, float wah, int num)
@@ -31,9 +34,18 @@ class Pad
   }
   
   //plays a sound, takes the name of the sound (ex. "ping1.mp3")
-  public void playSound(String soundName)
+  //returns sound duration
+  public float playSound(String soundName)
   {
     println("Played sound " + soundName + " from this pad");
+    currentSound = new SoundFile(LilyPad.this,"sounds/" + soundName);
+    if(currentSound != null)
+    {
+      currentSound.amp(0.1f);
+      currentSound.play();
+    }
+    
+    return currentSound.duration();
   }
   
   //"vibrates" the pad using the motor controllers (dummy for now)
@@ -52,12 +64,13 @@ class Pad
   
   //the pad internally handles mouse pressing, and will set its own "pressed" flag accordingly
   //you can get this state by calling isPressed() from your activity class
-  void mousePressed()
+  void mousePress()
   {
     if((mouseX > position.x - widthAndHeight/2) && (mouseX < position.x + widthAndHeight/2))
     {
       if((mouseY > position.y - widthAndHeight/2) && (mouseY < position.y + widthAndHeight/2))
       {
+        println("Pad " + padNumber + " has been pressed.");
         pressed = !pressed;
       }
     }
