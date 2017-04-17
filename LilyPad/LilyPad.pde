@@ -104,7 +104,10 @@ void mouseClicked()
       break;
 
     case MEMORY:  //Memory Activity
-      //
+      // 
+      for(int i = 0; i < memoryActivity.pads.length; i++){
+        memoryActivity.pads[i].mousePress();
+      }
       break;
 
     case SIMONSAYS:  //Simon Says Activity

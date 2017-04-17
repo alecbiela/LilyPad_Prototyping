@@ -7,6 +7,9 @@ class Memory
   IntList reds; //0
   IntList greens; //1
   IntList blues; //2
+  
+  IntList chosen;
+  IntList correct;
   //Game State "Enumerator"
   int gameState; //0 is pre game shuffle, 1 is displaying chosen color for one second, 2 is playing, 3 is complete
   
@@ -127,6 +130,7 @@ class Memory
           for(int i = 0; i < pads.length; i++){
             pads[i].setColor(200,200,200);
           }
+          timer = 0.0;
           gameState = 2;
         }
         
@@ -135,7 +139,62 @@ class Memory
         break;
         
       case 2:
-        println("Color Showing Successful");
+        //println("Color Showing Successful");
+        
+        // They haven't yet picked two pads.
+        if(chosen.size() !=2){
+          for(int i = 0; i < pads.length; i++){
+            //Don't let them pick the same pad twice.
+            if(pads[i].pressed && pads[i].padNumber != chosen.get(0) && pads[i].padNumber != chosen.get(1)){
+              // Add it to the chosen list.
+              chosen.append(pads[i].padNumber);
+           }
+          } 
+         }else{
+           //2 have been selected
+           
+           //2 are the same
+           if(matches(chosen,reds) || matches(chosen,greens) || matches(chosen,blues)){
+             
+             if(matches(chosen,reds)){
+               pads[reds.get(0)].setColor(255,0,0);
+               pads[reds.get(1)].setColor(255,0,0);
+               correct.append(reds.get(0));
+               correct.append(reds.get(1));
+             }else if(matches(chosen,greens)){
+               pads[greens.get(0)].setColor(0,255,0);
+               pads[greens.get(1)].setColor(0,255,0);
+               correct.append(greens.get(0));
+               correct.append(greens.get(1));
+             }else if(matches(chosen,blues)){
+               pads[blues.get(0)].setColor(0,0,255);
+               pads[blues.get(1)].setColor(0,0,255);
+               correct.append(blues.get(0));
+               correct.append(blues.get(1));
+             }
+             chosen = new IntList();
+           }else{
+             //2 are different i.e. incorrect selection
+             
+             //Wait for 3 seconds then turn the incorrect pads grey.
+             if(timer<3000.0){
+               timer+= deltaTime;
+             }else{
+               pads[chosen.get(0)].setColor(200,200,200);
+               pads[chosen.get(1)].setColor(200,200,200);
+               chosen = new IntList();
+             }
+           }
+         }
+         
+         //Light up the pads that are pressed or are correct.
+         if(chosen.size() >0){
+           ///RESUME HERE
+         }
+         
+         
+         
+        
         break;
       
       case 3:
@@ -171,6 +230,22 @@ class Memory
     //set state 
     gameState = 0;
     
+  }
+  
+  boolean matches(IntList list1, IntList list2){
+    if(list1.get(0) == list2.get(0) || list1.get(0) == list2.get(1)){
+      if(list1.get(1) == list2.get(0) || list1.get(1) == list2.get(1)){
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  boolean contains(IntList list1, int number){
+    if(list1.get(0) == number || list1.get(1) == number){
+      return true;
+    }
+    return false;
   }
   
 }
