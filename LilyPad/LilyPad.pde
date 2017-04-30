@@ -37,6 +37,9 @@ void setup()
 void draw()
 {
   calculateDeltaTime();
+   
+    
+  background(150);
   
   //decide what to do based on the current activity
   switch(currentPrototype)
