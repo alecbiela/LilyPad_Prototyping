@@ -75,4 +75,8 @@ class Pad
       }
     }
   }
+  
+  public void setPressed(boolean value){
+    pressed = value;
+  }
 }

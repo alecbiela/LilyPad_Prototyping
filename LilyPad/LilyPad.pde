@@ -106,7 +106,9 @@ void mouseClicked()
     case MEMORY:  //Memory Activity
       // 
       for(int i = 0; i < memoryActivity.pads.length; i++){
+        if(memoryActivity.selected<2){
         memoryActivity.pads[i].mousePress();
+        }
       }
       break;
 
