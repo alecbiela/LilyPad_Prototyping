@@ -10,6 +10,9 @@ class Pad
   color padColor;
   int padNumber;
   SoundFile currentSound;
+  PShape padShape;
+  PShape[] padLayers;
+  PShape padGroup;
   
   //constructor takes position, size (pixels), and what "number" pad it is
   public Pad(PVector pos, float wah, int num)
@@ -18,7 +21,13 @@ class Pad
     pressed = false;
     widthAndHeight = wah;
     padNumber = num;
-    padColor = color(200,200,200);
+    padColor = color(255,255,255);
+    padShape = loadShape("images/pad.svg");
+    
+    //build pad
+    padLayers = new PShape[6];
+    padGroup = createShape(GROUP);
+    buildPad();
   }
   
   //sets the color of the pad, takes rgb as arguments
@@ -41,7 +50,7 @@ class Pad
     currentSound = new SoundFile(LilyPad.this,"sounds/" + soundName);
     if(currentSound != null)
     {
-      currentSound.amp(0.1f);
+      currentSound.amp(0.8f);
       currentSound.play();
     }
     
@@ -57,9 +66,25 @@ class Pad
   //displays the pad on the screen
   public void display()
   {
-    fill(padColor);
-    ellipseMode(CENTER);
-    ellipse(position.x, position.y, widthAndHeight, widthAndHeight);    
+    //fill(padColor);
+    //ellipseMode(CENTER);
+    //ellipse(position.x, position.y, widthAndHeight, widthAndHeight);    
+    
+    //update color
+    padGroup.getChild(1).setFill(padColor);
+    padGroup.getChild(3).setFill(padColor);
+    padGroup.getChild(5).setFill(padColor);
+    
+    //draw pad
+    shapeMode(CORNERS);
+    
+      pushMatrix();
+      translate(position.x, position.y);
+      scale(widthAndHeight/padShape.width, widthAndHeight/padShape.height);
+      shape(padGroup, 0, 0);
+      popMatrix();
+
+   
   }
   
   //the pad internally handles mouse pressing, and will set its own "pressed" flag accordingly
@@ -76,7 +101,48 @@ class Pad
     }
   }
   
+
   public void setPressed(boolean value){
     pressed = value;
-  }
+	}
+	
+  //builds the layers of shapes that create the illusion of the lilypad
+  void buildPad()
+  {
+    //shapeMode(CENTER);
+    
+    for(int i=0; i<padLayers.length; i++)
+    {
+      padLayers[i] = loadShape("images/pad.svg");
+    }
+    
+    padLayers[0].setFill(color(0));
+    padLayers[0].translate(0-(padLayers[0].width/2),0-(padLayers[0].height/2));
+    padGroup.addChild(padLayers[0]);
+
+    padLayers[1].setFill(padColor);
+        padLayers[1].translate(0-(padLayers[1].width/2),0-(padLayers[1].height/2));
+    padLayers[1].scale(0.9);
+    padGroup.addChild(padLayers[1]);
+      
+
+    padLayers[2].setFill(color(0));
+        padLayers[2].translate(0-(padLayers[2].width/2),0-(padLayers[2].height/2));
+    padLayers[2].scale(0.55);
+    padGroup.addChild(padLayers[2]);
+    
+    padLayers[3].setFill(padColor);
+        padLayers[3].translate(0-(padLayers[3].width/2),0-(padLayers[3].height/2));
+    padLayers[3].scale(0.5);
+    padGroup.addChild(padLayers[3]);
+       
+    padLayers[4].setFill(color(0));
+    padLayers[4].translate(0-(padLayers[4].width/2),0-(padLayers[4].height/2));
+    padLayers[4].scale(0.2);
+    padGroup.addChild(padLayers[4]);
+    
+    padLayers[5].setFill(padColor);
+    padLayers[5].translate(0-(padLayers[5].width/2),0-(padLayers[5].height/2));
+    padLayers[5].scale(0.15);
+    padGroup.addChild(padLayers[5]);
 }

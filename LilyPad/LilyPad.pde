@@ -36,6 +36,8 @@ void setup()
 //called once per frame
 void draw()
 {
+  background(150);
+  
   calculateDeltaTime();
   
   //decide what to do based on the current activity
