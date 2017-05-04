@@ -145,4 +145,5 @@ class Pad
     padLayers[5].translate(0-(padLayers[5].width/2),0-(padLayers[5].height/2));
     padLayers[5].scale(0.15);
     padGroup.addChild(padLayers[5]);
+  }
 }
