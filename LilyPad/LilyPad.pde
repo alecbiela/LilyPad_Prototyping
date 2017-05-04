@@ -117,26 +117,26 @@ void mouseClicked()
           simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
           break;
         case 2:
-          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
           simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(2)].mousePress();
           break;
         case 3:
-          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
-          simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
-          simonActivity.pads[simonActivity.padOrder.get(2)].mousePress();
-          break;
-        case 4:
-          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
-          simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
-          simonActivity.pads[simonActivity.padOrder.get(2)].mousePress();
-          simonActivity.pads[simonActivity.padOrder.get(3)].mousePress();
-          break;
-        case 5:
-          simonActivity.pads[simonActivity.padOrder.get(0)].mousePress();
-          simonActivity.pads[simonActivity.padOrder.get(1)].mousePress();
-          simonActivity.pads[simonActivity.padOrder.get(2)].mousePress();
           simonActivity.pads[simonActivity.padOrder.get(3)].mousePress();
           simonActivity.pads[simonActivity.padOrder.get(4)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(5)].mousePress();
+          break;
+        case 4:
+          simonActivity.pads[simonActivity.padOrder.get(6)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(7)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(8)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(9)].mousePress();
+          break;
+        case 5:
+          simonActivity.pads[simonActivity.padOrder.get(10)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(11)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(12)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(13)].mousePress();
+          simonActivity.pads[simonActivity.padOrder.get(14)].mousePress();
           break;
       }
       break;
