@@ -5,8 +5,19 @@ class SimonSays
   Pad[] pads = new Pad[5];
   IntList padOrder = new IntList();
   PVector[] padColors = new PVector[5];
-  float timer;
-  float timer2;
+  float flashTimer;
+  float pressTimer;
+  float flashTimer2;
+  float pressTimer2;
+  boolean padPressed2;
+  boolean padPressed3;
+  float flashTimer3;
+  float pressTimer3;
+  float flashTimer4;
+  float pressTimer4;
+  float flashTimer5;
+  float pressTimer5;
+  
   
   //called once at the beginning of the program
   public SimonSays()
@@ -31,8 +42,22 @@ class SimonSays
     padColors[4] = new PVector(255, 136, 97);    
     
     //set attributes
-    timer = 0.0;
-    timer2 = 0.0;
+    flashTimer = 0.0;
+    pressTimer = 0.0;
+    flashTimer2 = 0.0;
+    pressTimer2 = 0.0;
+    flashTimer3 = 0.0;
+    pressTimer3 = 0.0;
+    flashTimer4 = 0.0;
+    pressTimer4 = 0.0;
+    flashTimer5 = 0.0;
+    pressTimer5 = 0.0;
+    
+    for(int i = 0; i < 15; i++)
+    {
+      padOrder.append((int)random(5));
+    }
+    
   }
   
   //update is called once per frame
@@ -44,15 +69,12 @@ class SimonSays
     switch(currentRound)
     {
      case 1:
-        //pick a random pad to set as the first instance in simon says
-        padOrder.append((int)random(5));
-      
         //color in the pad that is active after a few seconds
-        if(pads[padOrder.get(0)].isPressed() == false)
+        /*if(pads[padOrder.get(0)].isPressed() == false)
         {
-          timer += deltaTime;
+          flashTimer += deltaTime;
           //flash it momentarily
-          if(timer >= 1000 && timer <= 3000)
+          if(flashTimer >= 1000 && flashTimer <= 3000)
           {
             pads[padOrder.get(0)].setColor((int)padColors[padOrder.get(0)].x, 
             (int)padColors[padOrder.get(0)].y, (int)padColors[padOrder.get(0)].z);
@@ -61,60 +83,107 @@ class SimonSays
           {
             pads[padOrder.get(0)].setColor(200, 200, 200);
           }
-        }
+        }*/
+        
+        this.padNotPressed(0, flashTimer, deltaTime);
         
         //if the correct pad is selected, flash it momentarily
         if(pads[padOrder.get(0)].isPressed())
         {
-          timer2 += deltaTime;
+          pressTimer += deltaTime;
           pads[padOrder.get(0)].setColor((int)padColors[padOrder.get(0)].x, 
           (int)padColors[padOrder.get(0)].y, (int)padColors[padOrder.get(0)].z);
-          
-          if(timer2 >= 300)
-          {
-           pads[padOrder.get(0)].setColor(200, 200, 200);
-          }
           
           println("Round 1 Complete");
           currentRound = 2;
         }
+          
+        if(pressTimer >= 20)
+        {
+         pads[padOrder.get(0)].setColor(200, 200, 200);
+        }
+        
         break;
         
      case 2:
-        //reset the timer
-        timer = 0;
-         
-        //pick a random pad to set as the first instance in simon says
-        padOrder.append((int)random(5));
-      
+     
         //color in the pad that is active after a few seconds
-        if(pads[padOrder.get(0)].isPressed() == false)
+        if(pads[padOrder.get(1)].isPressed() == false)
         {
-          timer += deltaTime;
+          flashTimer2 += deltaTime;
           //flash it momentarily
-          if(timer >= 1000 && timer <= 3000)
+          if(flashTimer2 >= 1000 && flashTimer2 <= 3000)
           {
-            pads[padOrder.get(0)].setColor((int)padColors[padOrder.get(0)].x, 
-            (int)padColors[padOrder.get(0)].y, (int)padColors[padOrder.get(0)].z);
+            pads[padOrder.get(1)].setColor((int)padColors[padOrder.get(1)].x, 
+            (int)padColors[padOrder.get(1)].y, (int)padColors[padOrder.get(1)].z);
           }
           else
           {
-            pads[padOrder.get(0)].setColor(200, 200, 200);
+            pads[padOrder.get(1)].setColor(200, 200, 200);
+          }
+          
+          if(pressTimer >= 300)
+          {
+           pads[padOrder.get(1)].setColor(200, 200, 200);
+          }
+          
+        }
+        
+        //color in the pad that is active after a few seconds
+        if(pads[padOrder.get(2)].isPressed() == false)
+        {
+          flashTimer2 += deltaTime;
+          //flash it momentarily
+          if(flashTimer2 >= 3500 && flashTimer2 <= 5500)
+          {
+            pads[padOrder.get(2)].setColor((int)padColors[padOrder.get(2)].x, 
+            (int)padColors[padOrder.get(2)].y, (int)padColors[padOrder.get(2)].z);
+          }
+          else
+          {
+            pads[padOrder.get(2)].setColor(200, 200, 200);
           }
         }
         
         //if the correct pad is selected, flash it momentarily
-        if(pads[padOrder.get(0)].isPressed())
+        if(pads[padOrder.get(1)].isPressed())
         {
-          timer2 += deltaTime;
-          pads[padOrder.get(0)].setColor((int)padColors[padOrder.get(0)].x, 
-          (int)padColors[padOrder.get(0)].y, (int)padColors[padOrder.get(0)].z);
+          pressTimer2 += deltaTime;
+          pads[padOrder.get(1)].setColor((int)padColors[padOrder.get(1)].x, 
+          (int)padColors[padOrder.get(1)].y, (int)padColors[padOrder.get(1)].z);
           
-          if(timer2 >= 300)
+          padPressed2 = true;
+          
+          if(pressTimer2 >= 300)
           {
-           pads[padOrder.get(0)].setColor(200, 200, 200);
+           pads[padOrder.get(1)].setColor(200, 200, 200);
           }
         }
+        
+        //if the correct pad is selected, flash it momentarily
+        if(pads[padOrder.get(2)].isPressed())
+        {
+          pressTimer2 += deltaTime;
+          pads[padOrder.get(2)].setColor((int)padColors[padOrder.get(2)].x, 
+          (int)padColors[padOrder.get(2)].y, (int)padColors[padOrder.get(2)].z);
+          
+          padPressed3 = true;
+          
+          if(pressTimer2 >= 1000)
+          {
+           pads[padOrder.get(2)].setColor(200, 200, 200);
+          }
+        }
+        
+        if(padPressed2)
+        {
+          if(padPressed3)
+          {
+           println("Round 2 Complete");
+           currentRound++; 
+          }
+        }
+        
         break;
     }
   }
@@ -129,6 +198,23 @@ class SimonSays
       }
   }
   
-  
+  private void padNotPressed(int index, float fTimer, float dTime)
+  {
+    //color in the pad that is active after a few seconds
+        if(pads[padOrder.get(index)].isPressed() == false)
+        {
+          fTimer += dTime;
+          //flash it momentarily
+          if(fTimer >= 1000 && fTimer <= 3000)
+          {
+            pads[padOrder.get(index)].setColor((int)padColors[padOrder.get(index)].x, 
+            (int)padColors[padOrder.get(index)].y, (int)padColors[padOrder.get(index)].z);
+          }
+          else
+          {
+            pads[padOrder.get(index)].setColor(200, 200, 200);
+          }
+        }
+  }
   
 }
