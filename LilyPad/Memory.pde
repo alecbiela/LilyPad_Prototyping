@@ -20,9 +20,6 @@ class Memory
   int HALFWIDTH = 400;
   int HALFHEIGHT = 300;
   
-  
-  
-  
   //called once at the beginning of the program
   public Memory()
   {
@@ -240,8 +237,7 @@ class Memory
         break;
       
     }
-    
-    
+
     
     //called last after update logic
     this.display();
@@ -252,6 +248,7 @@ class Memory
   {
     //clear screen
     background(145);
+
       //display the pads on screen
       for(Pad p : pads)
       {
@@ -259,6 +256,7 @@ class Memory
       }
   }
   
+
   //Set the game to it's beginning state. Call when the game is over, or at the start.
   private void reset(){
     //Clear groups
@@ -276,9 +274,4 @@ class Memory
     gameState = 0;
     
   }
-  
-
-  
-
-  
 }

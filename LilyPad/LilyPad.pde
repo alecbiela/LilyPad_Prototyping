@@ -39,7 +39,7 @@ void draw()
   background(150);
   
   calculateDeltaTime();
-  
+
   //decide what to do based on the current activity
   switch(currentPrototype)
   {
@@ -106,6 +106,32 @@ void mouseClicked()
       break;
 
     case MEMORY:  //Memory Activity
+      //
+      break;
+
+    case SIMONSAYS:  //Simon Says Activity
+      //
+      break;
+
+    case LANDSCAPE:  //Landscape Activity
+      //landscapeActivity.currentPad.mousePress();
+      for(int i =0; i < landscapeActivity.pads.length;i++)
+      {
+        landscapeActivity.pads[i].mousePress();
+      }
+      break;
+  }  
+}
+
+void mousePressed()
+{
+    switch(currentPrototype)
+  {
+    case MUSIC:  //Music Activity
+      //if(!musicActivity.soundPlaying) musicActivity.currentPad.mousePress();
+      break;
+
+    case MEMORY:  //Memory Activity
       // 
       for(int i = 0; i < memoryActivity.pads.length; i++){
         if(memoryActivity.selected<2){
@@ -119,7 +145,6 @@ void mouseClicked()
       break;
 
     case LANDSCAPE:  //Landscape Activity
-      //landscapeActivity.currentPad.mousePress();
       break;
   }  
 }

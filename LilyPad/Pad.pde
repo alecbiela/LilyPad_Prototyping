@@ -10,6 +10,7 @@ class Pad
   color padColor;
   int padNumber;
   SoundFile currentSound;
+  boolean imageFading;
   PShape padShape;
   PShape[] padLayers;
   PShape padGroup;
@@ -21,6 +22,9 @@ class Pad
     pressed = false;
     widthAndHeight = wah;
     padNumber = num;
+    padColor = color(200,200,200);
+    imageFading=false;
+
     padColor = color(255,255,255);
     padShape = loadShape("images/pad.svg");
     
@@ -83,8 +87,6 @@ class Pad
       scale(widthAndHeight/padShape.width, widthAndHeight/padShape.height);
       shape(padGroup, 0, 0);
       popMatrix();
-
-   
   }
   
   //the pad internally handles mouse pressing, and will set its own "pressed" flag accordingly
@@ -100,7 +102,6 @@ class Pad
       }
     }
   }
-  
 
   public void setPressed(boolean value){
     pressed = value;
