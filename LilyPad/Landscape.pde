@@ -2,6 +2,7 @@ class Landscape
 {
   //attributes
   Pad[] pads = new Pad[5];
+
     Pad currentPad;
   boolean padLastPressed = false;
   boolean soundPlaying = false;
@@ -14,11 +15,13 @@ class Landscape
    PVector imagePos[] = new PVector[5];
    
    int alphas[]= new int[5];
+
   
   //called once at the beginning of the program
   public Landscape()
   {
     //set up Pads with new position & size (probably could leave the 3rd argument (pad number) be)
+
     pads[0] = new Pad(new PVector(80,520), 100,1);
     pads[1] = new Pad(new PVector(240,520), 100,2);
     pads[2] = new Pad(new PVector(400,520), 100,3);
@@ -40,14 +43,12 @@ class Landscape
       imageDirations[i]=500;
       alphas[i]=0;
     }
-    
-  
-    
   }
   
   //update is called once per frame
   public void update(float deltaTime)
   {
+
     for(int i =0; i < pads.length;i++)
     {
       
@@ -80,7 +81,6 @@ class Landscape
       
     }
     
-    
     //called last after update logic
     this.display();
   }
@@ -88,20 +88,21 @@ class Landscape
   //draw logic goes here, called at the end of every update frame
   private void display()
   {
+
       //draw diving line between ground and screen
       fill(0);
       rect(0,450,800,5);
       
       fill(color(102,51,0,150));
       rect(0,455,800,145);
-      
+
       //display the pads on screen
       for(Pad p : pads)
       {
          p.display();
       }
   }
-  
+ 
   
   private void DrawImages(int index, int alpha)
   {
@@ -122,6 +123,5 @@ class Landscape
         image(images[index], imagePos[index].x, imagePos[index].y);
     
   }
-  
-  
+
 }

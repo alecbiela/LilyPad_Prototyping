@@ -36,11 +36,10 @@ void setup()
 //called once per frame
 void draw()
 {
-  calculateDeltaTime();
-   
-    
   background(150);
   
+  calculateDeltaTime();
+
   //decide what to do based on the current activity
   switch(currentPrototype)
   {
@@ -91,7 +90,6 @@ void keyReleased()
     case 'P':
       currentPrototype = Prototypes.LANDSCAPE;
       break;
-      
   }
   
   println("Switched Activity to: " + currentPrototype);
@@ -117,7 +115,7 @@ void mouseClicked()
 
     case LANDSCAPE:  //Landscape Activity
       //landscapeActivity.currentPad.mousePress();
-            for(int i =0; i < landscapeActivity.pads.length;i++)
+      for(int i =0; i < landscapeActivity.pads.length;i++)
       {
         landscapeActivity.pads[i].mousePress();
       }
@@ -134,7 +132,12 @@ void mousePressed()
       break;
 
     case MEMORY:  //Memory Activity
-      //
+      // 
+      for(int i = 0; i < memoryActivity.pads.length; i++){
+        if(memoryActivity.selected<2){
+        memoryActivity.pads[i].mousePress();
+        }
+      }
       break;
 
     case SIMONSAYS:  //Simon Says Activity
@@ -144,9 +147,6 @@ void mousePressed()
     case LANDSCAPE:  //Landscape Activity
       break;
   }  
-  
-  
-  
 }
 
 //vusually display pad press
